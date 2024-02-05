@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<VTKFile type="Collection" version="0.1" byte_order="LittleEndian">
+<Collection>
+<DataSet timestep="0" file="weak1/weak1_0.vtu" />
+<DataSet timestep="1" file="weak1/weak1_1.vtu" />
+<DataSet timestep="2" file="weak1/weak1_2.vtu" />
+<DataSet timestep="3" file="weak1/weak1_3.vtu" />
+<DataSet timestep="4" file="weak1/weak1_4.vtu" />
+<DataSet timestep="5" file="weak1/weak1_5.vtu" />
+<DataSet timestep="6" file="weak1/weak1_6.vtu" />
+<DataSet timestep="7" file="weak1/weak1_7.vtu" />
+<DataSet timestep="8" file="weak1/weak1_8.vtu" />
+<DataSet timestep="9" file="weak1/weak1_9.vtu" />
+<DataSet timestep="10" file="weak1/weak1_10.vtu" />
+</Collection>
+</VTKFile>
