@@ -92,6 +92,7 @@ count = 0
 alpha = 0.5
 
 while error > tol:
+    print('asf')
     count += 1
     DASolver.solve()
     error = errornorm(wk, wkp1)

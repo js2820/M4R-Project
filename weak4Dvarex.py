@@ -44,7 +44,7 @@ F += 0.5*(u-u1)*(u-u1)/C*ds_t # integral over t=1 "surface"
 F += -0.5*p*p/Sigma*dx
 
 # "dynamical constraint"
-F += (p*u.dx(1) + kappa*p.dx(0)*u.dx(0) + c*v*u.dx(0))*dx
+F += (p*u.dx(1) + kappa*p.dx(0)*u.dx(0) + c*p*u.dx(0))*dx
 
 # the equation to solve
 dF = derivative(F, w)
