@@ -20,13 +20,15 @@ t = 0
 
 x, y = SpatialCoordinate(mesh)
 
+#Create some constants for the equations
 kappa = Constant(0.1)
 C = Constant(1)
 
-f.interpolate(sin(2*pi*x)*cos(pi*x))
+test = sin(pi*x)*cos(2*pi*x)
+f.interpolate(test)
 u0 = Function(V).assign(f)
 
-
+#Advection equation
 LHS = (inner(v, u) + kappa*deltat*inner(v.dx(0), u.dx(0)) + deltat*C*v*u.dx(0))*dx
 
 RHS = inner(v, f) * dx
@@ -41,8 +43,8 @@ while t < (1-deltat/2):
 pcg = PCG64(seed=123456789)
 rg = RandomGenerator(pcg)
 
-f_beta = rg.normal(V, 0, 0.1)
-#u += f_beta
+f_beta = rg.normal(V, 0, 1)
+u += f_beta
 
 print('New')
 

@@ -41,7 +41,7 @@ c = Constant(0.1)
 F = 0.5*(ukp1-u0)*(ukp1-u0)/gamma*ds_b # integral over t=0 "surface"
 
 # "data" (g0)
-F += 0.5*(ukp1-u1)*(ukp1-u1)/C*ds_t # integral over t=1 "surface"
+F += 0.5*(uk-u1)*(uk-u1)/C*ds_t # integral over t=1 "surface"
 
 # "cost"
 F += -0.5*pkp1*pkp1/Sigma*dx
@@ -56,8 +56,6 @@ daparams_brute = {
     "ksp_type": "preonly",
     "pc_type": "lu",
     "pc_factor_mat_solver_type": "mumps",
-    'snes_monitor' : None,
-    'ksp_monitor' : None
 }
 
 # make a problem to solve
@@ -77,10 +75,11 @@ daparams_field = {
     'fieldsplit_1_ksp_monitor' : None,
 } 
 
+
 boundary = DirichletBC(W.sub(0), u0 - gamma*pk, 'bottom')
 DAProblem = NonlinearVariationalProblem(dF, wkp1, bcs = boundary)
 DASolver = NonlinearVariationalSolver(DAProblem,
-                                      solver_parameters=daparams_field)
+                                      solver_parameters=daparams_brute)
 
 u, p = wkp1.subfunctions
 outfile = File("Para.pvd")
@@ -91,8 +90,8 @@ tol = 1e-4
 count = 0
 alpha = 0.5
 
+#Loop until error is acceptable
 while error > tol:
-    print('asf')
     count += 1
     DASolver.solve()
     error = errornorm(wk, wkp1)
@@ -100,6 +99,6 @@ while error > tol:
     wk.assign(alpha*wk + (1-alpha)*wkp1)
     outfile.write(u, p)
 
-    print(count)
+    print(count, error)
 
 #Write the solutions to another file
